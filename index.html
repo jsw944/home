@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>경기대학교 부동산자산관리학과 신입생 모집</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Academic Blue & Gold -->
+    <!-- Application Structure Plan: A top-down, single-page flow designed to guide prospective students logically from general information to specific, actionable details. The structure starts with a compelling hero section, introduces the department and its programs, highlights key strengths using interactive cards, presents the critical admissions timeline with dynamic date highlighting for immediate relevance, and concludes with clear contact information. This structure was chosen over a simple poster replication to create an intuitive user journey, making complex information digestible and focusing user attention on the most time-sensitive actions (checking the schedule). -->
+    <!-- Visualization & Content Choices: Hero Title -> Goal: Attract -> Presentation: Large typography -> Interaction: CTA scroll links. Program Details -> Goal: Organize -> Presentation: Tabbed interface -> Interaction: JS-powered tab switching. Strengths -> Goal: Persuade -> Presentation: Grid of cards with icons -> Interaction: CSS hover effects. Admissions Schedule -> Goal: Inform (time-sensitive) -> Presentation: Vertical timeline -> Interaction: JavaScript dynamically highlights the current/upcoming event based on the user's system date, providing immediate context and urgency. This replaces a static list with an intelligent, user-centric feature. All visuals are built with HTML/Tailwind to avoid external graphics. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+        .hero-bg {
+            background-color: #003366;
+            background-image: 
+                linear-gradient(rgba(0, 51, 102, 0.85), rgba(0, 51, 102, 0.85)),
+                url('https://placehold.co/1200x800/e2e8f0/cccccc?text=Campus+View');
+            background-size: cover;
+            background-position: center;
+        }
+        .section-title {
+            font-weight: 900;
+            color: #003366;
+        }
+        .highlight-text {
+            color: #DAA520;
+        }
+        .kgu-logo {
+            font-weight: 900;
+            font-size: 1.25rem;
+            color: #003366;
+            border: 2px solid #003366;
+            padding: 0.25rem 0.5rem;
+            display: inline-block;
+        }
+        .timeline-item.past .timeline-dot { background-color: #9ca3af; }
+        .timeline-item.past .timeline-content { opacity: 0.6; }
+        .timeline-item.active .timeline-dot { background-color: #DAA520; animation: pulse 2s infinite; }
+        .timeline-item.active .timeline-content { font-weight: 700; transform: scale(1.02); }
+        .timeline-item.future .timeline-dot { background-color: #003366; }
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(218, 165, 32, 0.7); }
+            50% { box-shadow: 0 0 0 10px rgba(218, 165, 32, 0); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <header class="sticky top-0 bg-white shadow-md z-50">
+        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <div class="kgu-logo">KGU</div>
+            <div class="space-x-4 md:space-x-8">
+                <a href="#programs" class="text-gray-600 hover:text-blue-800 transition">교육과정</a>
+                <a href="#strengths" class="text-gray-600 hover:text-blue-800 transition">학과특성</a>
+                <a href="#schedule" class="text-gray-600 hover:text-blue-800 transition">모집일정</a>
+                <a href="#contact" class="text-gray-600 hover:text-blue-800 transition">문의</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero-bg text-white py-20 md:py-32">
+            <div class="container mx-auto px-6 text-center">
+                <h1 class="text-3xl md:text-5xl font-black mb-4 leading-none">
+                    2026학년도 전기 신(편)입생 모집
+                </h1>
+                <p class="text-lg md:text-xl max-w-3xl mx-auto mb-8">
+                    경기대학교 일반대학원 <span class="highlight-text">부동산자산관리학과</span>는 부동산학 분야의 새로운 지평을 열고, 부동산자산관리 전문가를 양성하는 최고의 교육기관입니다.
+                </p>
+                <a href="#schedule" class="bg-yellow-500 hover:bg-yellow-600 text-blue-900 font-bold py-3 px-8 rounded-full text-lg transition transform hover:scale-105">
+                    모집일정 바로가기
+                </a>
+            </div>
+        </section>
+
+        <section id="programs" class="py-16 md:py-24 bg-white">
+            <div class="container mx-auto px-6">
+                <h2 class="section-title text-3xl md:text-4xl text-center mb-4">체계적인 교육과정</h2>
+                <p class="text-center text-gray-600 max-w-2xl mx-auto mb-12">
+                    이론과 실무를 겸비한 전문가 양성을 위해 석사, 박사, 그리고 석·박사 통합 과정을 제공합니다. 각 과정은 부동산 자산관리 분야의 리더가 되기 위한 깊이 있는 지식과 통찰력을 제공하도록 설계되었습니다.
+                </p>
+                <div class="max-w-4xl mx-auto">
+                    <div class="mb-4 flex justify-center border-b-2 border-gray-200">
+                        <button data-tab="master" class="tab-btn flex-1 py-3 px-4 text-lg font-bold border-b-4 border-blue-800 text-blue-800">석사과정</button>
+                        <button data-tab="phd" class="tab-btn flex-1 py-3 px-4 text-lg font-bold border-b-4 border-transparent text-gray-500">박사과정</button>
+                        <button data-tab="combined" class="tab-btn flex-1 py-3 px-4 text-lg font-bold border-b-4 border-transparent text-gray-500">석·박사 통합과정</button>
+                    </div>
+                    <div id="tab-content" class="p-6 bg-gray-50 rounded-lg shadow-inner">
+                        <div class="tab-pane active" id="master-content">
+                            <h3 class="text-2xl font-bold text-blue-800 mb-3">부동산 자산관리 전공 (석사)</h3>
+                            <p class="text-gray-700">부동산 자산관리 분야의 핵심 이론과 실무 지식을 습득하여 시장을 분석하고 가치를 창출하는 전문가를 양성합니다. 금융, 개발, 관리 등 다각적인 관점에서 부동산 시장을 이해하고 선도할 인재를 기다립니다.</p>
+                        </div>
+                        <div class="tab-pane hidden" id="phd-content">
+                             <h3 class="text-2xl font-bold text-blue-800 mb-3">부동산 자산관리 전공 (박사)</h3>
+                             <p class="text-gray-700">독창적인 연구를 통해 부동산학의 학문적 발전에 기여하고, 정책 및 산업 분야에서 최고의 영향력을 발휘할 수 있는 학자 및 전문가를 양성하는 것을 목표로 합니다. 심도 깊은 연구 역량을 기를 수 있습니다.</p>
+                        </div>
+                         <div class="tab-pane hidden" id="combined-content">
+                             <h3 class="text-2xl font-bold text-blue-800 mb-3">부동산 자산관리 전공 (석·박사 통합)</h3>
+                             <p class="text-gray-700">석사 및 박사 과정을 통합하여 보다 집중적이고 효율적인 연구 환경을 제공합니다. 단기간에 학문적 깊이와 연구 전문성을 극대화하여 차세대 부동산 리더로 성장할 수 있는 최적의 과정입니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="strengths" class="py-16 md:py-24">
+            <div class="container mx-auto px-6">
+                <h2 class="section-title text-3xl md:text-4xl text-center mb-4">부동산자산관리 전문가 양성의 메카</h2>
+                <p class="text-center text-gray-600 max-w-2xl mx-auto mb-12">
+                    경기대학교 부동산자산관리학과는 최고의 교육 환경과 지원을 통해 여러분을 성공으로 이끌 것입니다.
+                </p>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
+                        <div class="text-4xl text-blue-800 mb-4">🎓</div>
+                        <h3 class="text-xl font-bold mb-2">최고 수준의 교수진</h3>
+                        <p class="text-gray-600">학문적 깊이와 풍부한 실무 경험을 갖춘 교수진이 깊이 있는 지식과 통찰력을 제공합니다.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
+                        <div class="text-4xl text-blue-800 mb-4">📚</div>
+                        <h3 class="text-xl font-bold mb-2">체계적인 교육과정</h3>
+                        <p class="text-gray-600">이론과 실무가 조화된 커리큘럼을 통해 부동산 시장을 선도할 전문 역량을 강화합니다.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
+                        <div class="text-4xl text-blue-800 mb-4">💰</div>
+                        <h3 class="text-xl font-bold mb-2">다양한 장학제도</h3>
+                        <p class="text-gray-600">신입생 및 재학생을 위한 다양한 장학금 제도를 운영하여 학업에 전념할 수 있도록 지원합니다.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
+                        <div class="text-4xl text-blue-800 mb-4">🤝</div>
+                        <h3 class="text-xl font-bold mb-2">폭넓은 동문 네트워크</h3>
+                        <p class="text-gray-600">사회 각계각층에서 활동하는 선배들과의 교류를 통해 강력한 인적 네트워크를 구축할 수 있습니다.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
+                        <div class="text-4xl text-blue-800 mb-4">📜</div>
+                        <h3 class="text-xl font-bold mb-2">자격증 취득 지원</h3>
+                        <p class="text-gray-600">부동산 관련 전문 자격증 취득을 위한 특강 및 스터디 그룹을 적극적으로 지원합니다.</p>
+                    </div>
+                     <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 flex flex-col justify-center items-center text-center">
+                        <div class="text-4xl text-yellow-500 mb-4">🚀</div>
+                        <h3 class="text-xl font-bold text-blue-900">당신의 미래,<br>여기서 시작됩니다.</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="schedule" class="py-16 md:py-24 bg-white">
+            <div class="container mx-auto px-6">
+                <h2 class="section-title text-3xl md:text-4xl text-center mb-4">2026학년도 전기 입학전형 일정</h2>
+                 <p class="text-center text-gray-600 max-w-2xl mx-auto mb-12">
+                    아래 일정을 확인하시고 지원을 준비해주시기 바랍니다. 각 일정은 중요한 단계이므로 유의 깊게 살펴보세요. 현재 진행 중이거나 다가오는 일정은 하이라이트됩니다.
+                </p>
+                <div class="max-w-2xl mx-auto">
+                    <div class="relative">
+                        <div class="absolute left-4 top-0 h-full w-1 bg-gray-200 rounded"></div>
+                        <div id="timeline-container" class="space-y-12">
+                            <div class="timeline-item pl-12 relative" data-date="2025-10-13T10:00:00" data-end-date="2025-10-24T17:00:00">
+                                <div class="timeline-dot absolute left-4 top-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 rounded-full transition-colors duration-500"></div>
+                                <div class="timeline-content bg-gray-50 p-6 rounded-lg shadow-md border-l-4 border-blue-800 transition-all duration-300">
+                                    <p class="text-sm text-gray-500">STEP 1</p>
+                                    <h3 class="text-xl font-bold text-blue-900 mb-1">원서 접수</h3>
+                                    <p class="font-semibold">2025. 10. 13 (월) 10:00 ~ 10. 24 (금) 17:00</p>
+                                    <p class="text-sm text-gray-600 mt-2">경기대학교 일반대학원 홈페이지에서 온라인으로 접수합니다.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item pl-12 relative" data-date="2025-11-15T10:00:00">
+                                <div class="timeline-dot absolute left-4 top-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 rounded-full transition-colors duration-500"></div>
+                                 <div class="timeline-content bg-gray-50 p-6 rounded-lg shadow-md border-l-4 border-blue-800 transition-all duration-300">
+                                    <p class="text-sm text-gray-500">STEP 2</p>
+                                    <h3 class="text-xl font-bold text-blue-900 mb-1">면접 / 구술고사</h3>
+                                    <p class="font-semibold">2025. 11. 15 (토) 10:00</p>
+                                     <p class="text-sm text-gray-600 mt-2">전공에 대한 이해도와 학업 계획을 평가합니다.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item pl-12 relative" data-date="2025-11-28T17:00:00">
+                                <div class="timeline-dot absolute left-4 top-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 rounded-full transition-colors duration-500"></div>
+                                <div class="timeline-content bg-gray-50 p-6 rounded-lg shadow-md border-l-4 border-blue-800 transition-all duration-300">
+                                    <p class="text-sm text-gray-500">STEP 3</p>
+                                    <h3 class="text-xl font-bold text-blue-900 mb-1">합격자 발표</h3>
+                                    <p class="font-semibold">2025. 11. 28 (금) 17:00</p>
+                                    <p class="text-sm text-gray-600 mt-2">대학원 홈페이지에서 합격 여부를 확인할 수 있습니다.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <footer id="contact" class="bg-blue-900 text-white">
+        <div class="container mx-auto px-6 py-12">
+            <div class="grid md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-2xl font-bold mb-4">문의 및 상담</h3>
+                    <p class="text-blue-200 mb-6">입학과 관련하여 궁금한 점이 있으시면 언제든지 연락주시기 바랍니다.</p>
+                    <div class="space-y-4">
+                        <div class="flex items-center">
+                            <span class="text-yellow-400 mr-3 text-xl">🏢</span>
+                            <div>
+                                <p class="font-bold">학과사무실</p>
+                                <a href="tel:031-249-9836" class="text-blue-200 hover:text-white">031-249-9836</a>
+                            </div>
+                        </div>
+                         <div class="flex items-center">
+                            <span class="text-yellow-400 mr-3 text-xl">🏫</span>
+                             <div>
+                                <p class="font-bold">대학원 교학팀</p>
+                                <a href="tel:031-249-9245" class="text-blue-200 hover:text-white">031-249-9245~7</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center md:text-right">
+                    <h4 class="text-xl font-bold mb-4">온라인 지원</h4>
+                    <p class="text-blue-200 mb-6">원서접수 기간에 아래 링크를 통해 지원하실 수 있습니다.</p>
+                    <a href="#" class="inline-block bg-white text-blue-900 font-bold py-3 px-8 rounded-full hover:bg-gray-200 transition">
+                       경기대학교 일반대학원 홈페이지
+                    </a>
+                    <div class="mt-8">
+                        <p class="text-sm text-blue-300">
+                            &copy; 2025 Kyonggi University, Dept. of Real Estate & Asset Management. All rights reserved.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const tabs = document.querySelectorAll('.tab-btn');
+            const tabPanes = document.querySelectorAll('.tab-pane');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const targetTab = tab.dataset.tab;
+
+                    tabs.forEach(t => {
+                        t.classList.remove('border-blue-800', 'text-blue-800');
+                        t.classList.add('border-transparent', 'text-gray-500');
+                    });
+                    tab.classList.add('border-blue-800', 'text-blue-800');
+                    tab.classList.remove('border-transparent', 'text-gray-500');
+
+                    tabPanes.forEach(pane => {
+                        if (pane.id === `${targetTab}-content`) {
+                            pane.classList.remove('hidden');
+                            pane.classList.add('active');
+                        } else {
+                            pane.classList.add('hidden');
+                            pane.classList.remove('active');
+                        }
+                    });
+                });
+            });
+            
+            const timelineItems = document.querySelectorAll('.timeline-item');
+            const now = new Date();
+            
+            let activeSet = false;
+
+            timelineItems.forEach((item, index) => {
+                const dateStr = item.dataset.date;
+                const endDateStr = item.dataset.endDate;
+                const itemDate = new Date(dateStr);
+                const itemEndDate = endDateStr ? new Date(endDateStr) : itemDate;
+                
+                if (now > itemEndDate) {
+                    item.classList.add('past');
+                } else if (now >= itemDate && now <= itemEndDate) {
+                     item.classList.add('active');
+                     activeSet = true;
+                } else {
+                    if (!activeSet) {
+                         item.classList.add('active');
+                         activeSet = true;
+                    } else {
+                        item.classList.add('future');
+                    }
+                }
+            });
+
+            if (!activeSet && timelineItems.length > 0) {
+                 timelineItems[timelineItems.length - 1].classList.add('active');
+            }
+            
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+        });
+    </script>
+
+</body>
+</html>
